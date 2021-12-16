@@ -1,4 +1,6 @@
+import os
 import time
+from config import PASSWORD
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -7,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from env.config import USERNAME, PASSWORD
+USERNAME, PASSWORD = os.environ["USERNAME"], os.environ["PASSWORD"]
 
 options             = Options()
 options.headless    = True
