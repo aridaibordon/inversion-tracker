@@ -5,7 +5,7 @@ from env.config import TOKEN, CHAT_ID
 
 def dif_to_str(dif):
     if dif < 0:
-        text = "- "
+        text = ""
     else:
         text = "+ "
     return text + f"{dif:.2f}"
