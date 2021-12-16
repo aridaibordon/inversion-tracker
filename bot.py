@@ -3,7 +3,7 @@ import sqlite3
 
 from telegram import Bot
 
-TOKEN, CHAT_ID   = os.environ["TOKEN"], os.environ["CHAT_ID"]
+TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
 
 def dif_to_str(dif):
     if dif < 0:
