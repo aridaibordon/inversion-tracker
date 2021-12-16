@@ -1,6 +1,5 @@
 import os
 import time
-from config import PASSWORD
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
