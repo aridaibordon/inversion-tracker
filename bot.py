@@ -9,7 +9,7 @@ def dif_to_str(dif):
     if dif < 0:
         text = ""
     else:
-        text = "+ "
+        text = "+"
     return text + f"{dif:.2f}"
 
 def send_degiro():
