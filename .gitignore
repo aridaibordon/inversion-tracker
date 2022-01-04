@@ -93,7 +93,7 @@ env/
 venv/
 ENV/
 env.bak/
-venv.bak/
+venv.bak/python-dotenv
 
 # Spyder project settings
 .spyderproject
@@ -112,3 +112,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Databases
+inversion.db

@@ -1,8 +1,9 @@
 import schedule
+import os.path
 import time
 
 from degiro import get_degiro_balance
-from database import update_degiro
+from database import update_degiro, create_database
 from bot import send_degiro
 
 def main_task(hour=None):
@@ -22,4 +23,7 @@ def main():
         time.sleep(300)
 
 if __name__ == "__main__":
+    if not(os.path.isfile("inverison.db")):
+        create_database()
+
     main_task()

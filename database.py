@@ -15,11 +15,11 @@ def update_degiro(balance: float) -> None:
     con.commit()
     cur.close()
 
-def add_operation(active, number, cpu) -> None:
+def add_operation(active, number, cpu, crypto) -> None:
     con     = sqlite3.connect("inversion.db")
     cur     = con.cursor()
 
-    cur.execute("INSERT INTO operations (active, number, cpu) VALUES (?, ?, ?)", (active, number, cpu))
+    cur.execute("INSERT INTO operations (active, number, cpu, crypto) VALUES (?, ?, ?, ?)", (active, number, cpu, crypto))
     con.commit()
     cur.close()
 
