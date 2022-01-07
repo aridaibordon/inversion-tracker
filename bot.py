@@ -20,3 +20,4 @@ def send_degiro():
     
     bot = Bot(token=TOKEN)
     bot.send_message(chat_id=CHAT_ID, text=f"Tu portfolio total en DEGIRO es {bal} ({dif_to_str(dif)})€")
+
