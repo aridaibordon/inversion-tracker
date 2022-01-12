@@ -7,7 +7,7 @@ from bot import send_degiro
 
 
 def main(hour=None):
-    if date.today().weekday() > 4:
+    if date.today().weekday() < 5:
         update_degiro(get_degiro_balance())
         send_degiro()
 
