@@ -8,8 +8,10 @@ from bot import send_degiro
 
 def main(hour=None):
     if date.today().weekday() < 5:
-        update_degiro(get_degiro_balance())
-        send_degiro()
+        balance = get_degiro_balance()
+
+        update_degiro(balance)
+        send_degiro(balance)
 
 
 if __name__ == "__main__":
