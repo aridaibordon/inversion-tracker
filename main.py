@@ -1,8 +1,6 @@
-import schedule
 import os.path
-import time
-
 from datetime import date
+
 from degiro import get_degiro_balance
 from database import update_degiro, create_database
 from bot import send_degiro
@@ -15,7 +13,6 @@ def main(hour=None):
 
 
 if __name__ == "__main__":
-    if not (os.path.isfile("inversion.db")):
+    if not os.path.isfile("inversion.db"):
         create_database()
-
     main()
