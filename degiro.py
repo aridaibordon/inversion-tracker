@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 
 from webdriver_manager.chrome import ChromeDriverManager
 
-USERNAME, PASSWORD = os.environ["USERNAME"], os.environ["PASSWORD"]
+USERNAME, PASSWORD = os.environ["USERDEGIRO"], os.environ["PASSWORD"]
 
 
 def text_to_float(text) -> float:
