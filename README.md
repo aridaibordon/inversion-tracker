@@ -1,1 +1,1 @@
-# Inversion tracker for DEGIRO and crypto.
+# Inversion tracker for DEGIRO.
