@@ -10,7 +10,7 @@ def create_database() -> None:
     con.commit()
 
 
-def update_degiro(balance: float) -> None:
+def update_degiro_db(balance: float) -> None:
     con = sqlite3.connect("inversion.db")
     cur = con.cursor()
 
