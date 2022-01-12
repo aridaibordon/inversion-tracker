@@ -5,13 +5,13 @@ def create_database() -> None:
     con = sqlite3.connect("inversion.db")
     cur = con.cursor()
     cur.execute(
-        "CREATE TABLE degiro (id integer PRIMARY KEY, balance float, orderDate date DEFAULT(datetime()))"
+        "CREATE TABLE [IF NOT EXISTS] degiro (id integer PRIMARY KEY, balance float, orderDate date DEFAULT(datetime()))"
     )
     cur.execute(
-        "CREATE TABLE operations (id integer PRIMARY KEY, active text, number float, cost float, orderDate date DEFAULT(datetime()), crypto bool)"
+        "CREATE TABLE [IF NOT EXISTS] operations (id integer PRIMARY KEY, active text, number float, cost float, orderDate date DEFAULT(datetime()), crypto bool)"
     )
     cur.execute(
-        "CREATE TABLE portfolio (id integer PRIMARY KEY, active text, number float, orderDate date DEFAULT(datetime()), crypto bool)"
+        "CREATE TABLE [IF NOT EXISTS] portfolio (id integer PRIMARY KEY, active text, number float, orderDate date DEFAULT(datetime()), crypto bool)"
     )
 
 
