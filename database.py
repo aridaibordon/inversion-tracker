@@ -4,10 +4,10 @@ import psycopg2
 
 def connect_dataset():
     con = psycopg2.connect(
-        host=os.environ["SERVER"],
-        dbname=os.environ["DATABASE"],
-        user=os.environ["USERSQL"],
-        password=os.environ["PASSSQL"]
+        host        = os.environ["SERVER"],
+        dbname      = os.environ["DATABASE"],
+        user        = os.environ["USERSQL"],
+        password    = os.environ["PASSSQL"]
         )
     return con, con.cursor()
 
@@ -20,7 +20,7 @@ def close_session(connection, cursor):
 def return_balance() -> list:
     con, cur    = connect_dataset()
     cur.execute("SELECT balance FROM degiro ORDER BY id DESC LIMIT 2")
-    balance = cur.fetchall()
+    balance = [item[0] for item in cur.fetchall()]
     close_session(con, cur)
     return balance
     
