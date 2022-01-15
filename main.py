@@ -7,7 +7,7 @@ from bot import send_degiro
 
 def main(hour=None):
     create_database()
-    if date.today().weekday() < 5:
+    if date.today().weekday() < 6:
         balance = get_degiro_balance()
 
         update_degiro_db(balance)
