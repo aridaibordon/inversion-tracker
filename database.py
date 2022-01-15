@@ -27,9 +27,9 @@ def return_balance() -> list:
 def create_database() -> None:
     con, cur = connect_dataset()
 
-    cur.execute("CREATE TABLE IF NOT EXISTS degiro (id integer BIGSERIAL NOT NULL PRIMARY KEY, balance float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE)")
-    cur.execute("CREATE TABLE IF NOT EXISTS operations (id integer BIGSERIAL NOT NULL PRIMARY KEY, active text NOT NULL, number float NOT NULL, cost float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE, crypto bool NOT NULL)")
-    cur.execute("CREATE TABLE IF NOT EXISTS portfolio (id integer BIGSERIAL NOT NULL PRIMARY KEY, active text NOT NULL, number float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE, crypto bool NOT NULL)")
+    cur.execute("CREATE TABLE IF NOT EXISTS degiro (id bigserial NOT NULL PRIMARY KEY, balance float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE)")
+    cur.execute("CREATE TABLE IF NOT EXISTS operations (id bigserial NOT NULL PRIMARY KEY, active text NOT NULL, number float NOT NULL, cost float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE, crypto bool NOT NULL)")
+    cur.execute("CREATE TABLE IF NOT EXISTS portfolio (id bigserial NOT NULL PRIMARY KEY, active text NOT NULL, number float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE, crypto bool NOT NULL)")
     con.commit()
     close_session(con, cur)
 
