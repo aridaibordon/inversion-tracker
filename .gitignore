@@ -116,5 +116,5 @@ dmypy.json
 # Databases
 inversion.db
 
-# Test files
+# Test script
 test.py
