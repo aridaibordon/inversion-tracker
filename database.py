@@ -37,7 +37,7 @@ def create_database() -> None:
 def update_degiro_db(balance: float) -> None:
     con, cur = connect_dataset()
 
-    cur.execute("INSERT INTO degiro (balance) VALUES (%s)", (balance))
+    cur.execute("INSERT INTO degiro (balance) VALUES (%s)", (balance,))
     con.commit()
     close_session(con, cur)
 
@@ -45,7 +45,7 @@ def update_degiro_db(balance: float) -> None:
 def add_operation(active, number, cpu, crypto) -> None:
     con, cur = connect_dataset()
 
-    cur.execute("INSERT INTO operations (active, number, cpu, crypto) VALUES (%s, %s, %s, %s)", (active, number, cpu, crypto))
+    cur.execute("INSERT INTO operations (active, number, cost, crypto) VALUES (%s, %s, %s, %s)", (active, number, cpu, crypto))
     con.commit()
     close_session(con, cur)
 
