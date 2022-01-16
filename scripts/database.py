@@ -17,9 +17,9 @@ def close_session(connection, cursor):
     connection.close()
 
 
-def return_balance() -> list:
+def return_balance(number) -> list:
     con, cur    = connect_dataset()
-    cur.execute("SELECT balance FROM degiro ORDER BY id DESC LIMIT 2")
+    cur.execute("SELECT balance FROM degiro ORDER BY id DESC LIMIT %s", (str(number),))
     balance = [item[0] for item in cur.fetchall()]
     close_session(con, cur)
     return balance
