@@ -1,7 +1,7 @@
 import os
 
 from telegram import Bot
-from database import return_balance
+from scripts.database import return_balance
 
 TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
 
