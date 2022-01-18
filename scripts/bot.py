@@ -2,12 +2,14 @@ import os
 
 from datetime import date
 from telegram import ParseMode, Bot
+
+from scripts.plot import create_weekly_plot
 from scripts.database import return_balance
 
 TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
 
 
-def send_degiro():
+def send_daily_report():
     bot = Bot(token=TOKEN)
 
     today       = date.today().strftime('%d/%m/%Y')
@@ -19,6 +21,8 @@ def send_degiro():
 
 
 def send_weekly_report():
+    create_weekly_plot()
+    
     bot     = Bot(token=TOKEN)
 
     week    = date.today().strftime('%U/%Y')
