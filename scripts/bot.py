@@ -22,7 +22,7 @@ def send_daily_report():
 
 def send_weekly_report():
     create_weekly_plot()
-    
+
     bot     = Bot(token=TOKEN)
 
     week    = date.today().strftime('%U/%Y')
