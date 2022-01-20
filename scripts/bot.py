@@ -20,7 +20,9 @@ def send_daily_report():
     text   = f'<b>Daily report</b> ({today})\n\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
     text  += f'\n\n<pre>Watchlist\n'
 
-    for stock in ['^IBEX', '^GSPC', '^IXIC', 'BTC-USD']:
+    watchlist = ['^IBEX', '^GSPC', '^IXIC', 'BTC-USD']
+
+    for stock in watchlist:
         ticker  = yf.Ticker(stock)
         per     = ticker.history()['Close'].pct_change()[today]
         text   += f'\n{stock:<28} {per:+.2%}'
