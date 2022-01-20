@@ -1,5 +1,8 @@
-from dotenv import load_dotenv
-load_dotenv()
+import os.path
+
+if os.path.isfile('.env'):
+    from dotenv import load_dotenv
+    load_dotenv()
 
 from datetime import date
 
