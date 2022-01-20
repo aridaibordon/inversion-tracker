@@ -1,4 +1,5 @@
 import os
+import yfinance as yf
 
 from datetime import date
 from telegram import ParseMode, Bot
@@ -16,9 +17,15 @@ def send_daily_report():
     now, last   = return_balance(2)
     dif         = (now - last) / last
 
-    text   = f'<b>Daily report</b> ({today})\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
-    bot.send_message(chat_id=CHAT_ID, text=text, parse_mode=ParseMode.HTML)
+    text   = f'<b>Daily report</b> ({today})\n\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
+    text  += f'\n\n<pre>Watchlist\n'
 
+    for stock in ['^IBEX', '^GSPC', '^IXIC', 'BTC-USD']:
+        ticker  = yf.Ticker(stock)
+        per     = ticker.history()['Close'].pct_change()[today]
+        text   += f'\n{stock:<15} {per:+.2%}'
+
+    bot.send_message(chat_id=CHAT_ID, text=text+'</pre>', parse_mode=ParseMode.HTML)
 
 def send_weekly_report():
     create_weekly_plot()
