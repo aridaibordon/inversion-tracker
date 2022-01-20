@@ -17,7 +17,7 @@ def main(debug=False):
         update_degiro_db(get_degiro_balance())
         send_daily_report()
 
-    if date.today().weekday() == 5 or debug:
+    if date.today().weekday() == 4 or debug:
         send_weekly_report()
 
 
