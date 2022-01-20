@@ -17,6 +17,7 @@ This repository tracks the balance of any DEGIRO account and send reports using 
 ### Raw ideas
 * Add BTC and ETH wallet tracker for some given public address.
 * Create web server and application.
+* Add more brokers (eToro, Interactive Brokers).
 
 ### Completed
 * Add weekly reports with custom plots.
