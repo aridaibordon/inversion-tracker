@@ -38,6 +38,6 @@ def send_weekly_report():
     balance = return_balance(5)
     dif     = (balance[0] - balance[-1]) / balance[-1]
 
-    text    = f'<b>Weekly report</b> ({week})\nDuring this week, your investment have yield a total of {dif:+.2%}.'
+    text    = f'<b>Weekly report</b> (week {week})\nDuring this week, your investment have yield a total of {dif:+.2%}.'
     bot.send_message(chat_id=CHAT_ID, text=text, parse_mode=ParseMode.HTML)
     bot.send_photo(chat_id=CHAT_ID, photo=open('plots/weekly-report.png', 'rb'))
