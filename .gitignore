@@ -8,5 +8,5 @@ env/
 # Google API
 client_secret.json
 
-# Test script
-test.py
+# Test folder
+test/
