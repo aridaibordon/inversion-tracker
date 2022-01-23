@@ -1,7 +1,14 @@
+# Google API packages
+google-api-python-client==2.36.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.4.6
+
+# Other relevant packages
 python-telegram-bot==13.8.1
 webdriver-manager==3.5.2
 psycopg2==2.9.3
 selenium==4.1.0
 schedule==1.1.0
+yfinance==0.1.69
 seaborn==0.11.2
 pylatex==1.4.1

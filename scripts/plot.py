@@ -18,14 +18,13 @@ def create_weekly_plot() -> None:
     mpl.rcParams['xtick.color']     = SECONDARY_COLOR
     mpl.rcParams['ytick.color']     = SECONDARY_COLOR
 
-    plt.rcParams['font.size']       = 12
-    plt.rcParams['axes.linewidth']  = 1.5
+    mpl.rcParams['font.size']       = 14
+    mpl.rcParams['axes.linewidth']  = 1.5
 
     fig = plt.figure(figsize=(6, 4), tight_layout=True)
     ax = fig.add_subplot(111)
 
-    # return_balance(5)[::-1]
-    ax.plot(range(5), range(5), 'o-', linewidth=1.5, color=SECONDARY_COLOR)
+    ax.plot(range(5), return_balance(5)[::-1], 'o-', linewidth=1.5, color=SECONDARY_COLOR)
 
     ax.set_xticks(range(5))
     ax.set_xticklabels([day[:3] for day in days])
@@ -35,7 +34,7 @@ def create_weekly_plot() -> None:
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
 
-    ax.set_ylabel("Final balance (in euros)")
+    ax.set_ylabel("Final balance\n(in euros)")
     ax.set(facecolor = PRIMARY_COLOR)
     fig.patch.set_facecolor(PRIMARY_COLOR)
     fig.suptitle(f"Weekly report {year}/{week:02d}")
