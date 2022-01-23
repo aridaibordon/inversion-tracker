@@ -22,5 +22,4 @@ This repository tracks the balance of any DEGIRO account and send reports using 
 ### Completed
 * Compare daily earnings with a selection of indexes and stocks (01/22).
 * Add weekly reports with custom plots (01/22).
-* Migrate from sqlite to postgreSQL (12/21).
-* 
+* Migrate from sqlite to postgreSQL (12/21). 
