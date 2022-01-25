@@ -13,21 +13,22 @@ TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
 def send_daily_report():
     bot = Bot(token=TOKEN)
 
-    today       = date.today().strftime('%d/%m/%Y')
+    today       = date.today()
     now, last   = return_balance(2)
     dif         = (now - last) / last
 
-    text   = f'<b>Daily report</b> ({today})\n\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
+    text   = f'<b>Daily report</b> ({today.strftime("%d/%m/%Y/")})\n\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
     text  += f'\n\n<pre>Watchlist\n'
 
     watchlist = ['^IBEX', '^GSPC', '^IXIC', 'BTC-USD']
 
     for stock in watchlist:
         ticker  = yf.Ticker(stock)
-        per     = ticker.history()['Close'].pct_change()[today]
+        per     = ticker.history()['Close'].pct_change()[today.strftime("%Y-%m-%d")]
         text   += f'\n{stock:<28} {per:+.2%}'
 
     bot.send_message(chat_id=CHAT_ID, text=text+'</pre>', parse_mode=ParseMode.HTML)
+
 
 def send_weekly_report():
     create_weekly_plot()
