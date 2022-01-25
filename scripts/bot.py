@@ -24,7 +24,7 @@ def send_daily_report():
 
     for stock in watchlist:
         ticker  = yf.Ticker(stock)
-        per     = ticker.history()['Close'].pct_change()[today.strftime("%Y-%m-%d")]
+        per     = ticker.history()['Close'].pct_change()[-1]
         text   += f'\n{stock:<28} {per:+.2%}'
 
     bot.send_message(chat_id=CHAT_ID, text=text+'</pre>', parse_mode=ParseMode.HTML)
