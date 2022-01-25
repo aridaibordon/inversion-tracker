@@ -17,7 +17,7 @@ def send_daily_report():
     now, last   = return_balance(2)
     dif         = (now - last) / last
 
-    text   = f'<b>Daily report</b> ({today.strftime("%d/%m/%Y/")})\n\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
+    text   = f'<b>Daily report</b> ({today.strftime("%d/%m/%Y")})\n\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
     text  += f'\n\n<pre>Watchlist\n'
 
     watchlist = ['^IBEX', '^GSPC', '^IXIC', 'BTC-USD']
