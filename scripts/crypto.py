@@ -3,7 +3,7 @@ import json
 
 
 def get_address_balance(address: int) -> int:
-    # Return address balance in satoshi
+    # Return address balance in satoshis
     r       = requests.get(f"https://blockchain.info/rawaddr/{address}")
     data    = json.loads(r.text)
 
