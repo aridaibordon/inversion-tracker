@@ -1,17 +1,16 @@
 import requests
 import json
 
+import yfinance as yf
+
 
 def get_address_balance(address: int) -> int:
-    # Return address balance in satoshis
+    # Return address balance in euros.
     r       = requests.get(f"https://blockchain.info/rawaddr/{address}")
     data    = json.loads(r.text)
 
+    btc_value = yf.Ticker('BTC-EUR').history(period='1d')['Close'][0]
+
     if "final_balance" in data.keys():
-        return data["final_balance"]
+        return data["final_balance"]*btc_value*1e-8
     raise ValueError("'address' is not valid or have not been found")
-
-
-if __name__ == "__main__":
-    address = "1H2ZrzYnXmf2Q1RRua4bADSWPSHXZPNtBX"
-    print(get_address_balance(address))
