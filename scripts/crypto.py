@@ -1,19 +1,9 @@
 import requests
 import json
 
+from scripts.database import get_addresses
+
 import yfinance as yf
-
-
-def load_addresses() -> list:
-    # Load all addresses in address.txt
-    with open('scripts/address.txt', 'r') as file:
-        return file.read().split()
-
-
-def add_new_address(address) -> None:
-    # Add new address to address.txt
-    with open('scripts/address.txt', 'a') as file:
-        file.write(f'{address}\n')
 
 
 def get_address_balance(address: int) -> float:
@@ -31,10 +21,6 @@ def get_address_balance(address: int) -> float:
 def get_total_balance() -> float:
     # Return balance of all addresses in address.txt
     balance = 0
-    for address in load_addresses():
+    for address in get_addresses():
         balance += get_address_balance(address)
     return balance
-
-
-if __name__ == '__main__':
-    get_total_balance()

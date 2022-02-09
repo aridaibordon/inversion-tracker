@@ -1,6 +1,8 @@
 import os
 import psycopg2
 
+from dotenv import load_dotenv
+load_dotenv()
 
 def connect_database():
     # Create connection and cursor to PosgreSQL database.
@@ -24,7 +26,7 @@ def create_tables() -> None:
     con, cur = connect_database()
 
     cur.execute('CREATE TABLE IF NOT EXISTS degiro (id bigserial NOT NULL PRIMARY KEY, balance float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE)')
-    cur.execute('CREATE TABLE IF NOT EXISTS address (id bigserial NOT NULL PRIMARY KEY, address text NOT NULL')
+    cur.execute('CREATE TABLE IF NOT EXISTS address (id bigserial NOT NULL PRIMARY KEY, address text NOT NULL)')
     con.commit()
     close_session(con, cur)
 
@@ -42,7 +44,7 @@ def update_degiro_db(balance: float) -> None:
     # Insert new balance to database.
     con, cur = connect_database()
 
-    cur.execute("INSERT INTO degiro (balance) VALUES (%s)", (balance,))
+    cur.execute('INSERT INTO degiro (balance) VALUES (%s)', (balance,))
     con.commit()
     close_session(con, cur)
 
@@ -51,16 +53,16 @@ def return_balance(count: int) -> list:
     # Return last {count} balances.
     con, cur    = connect_database()
     cur.execute("SELECT balance FROM degiro ORDER BY id DESC LIMIT %s", (str(count),))
-    balance = [item[0] for item in cur.fetchall()]
+    balance     = [item[0] for item in cur.fetchall()]
     close_session(con, cur)
     return balance
 
 
 def get_addresses() -> tuple:
     # Return all addresses in database.
-    con, cur = connect_database()
-    
-    data = cur.execute('SELECT address FROM address')
+    con, cur    = connect_database()
+    cur.execute('SELECT address FROM address')
+    addresses   = [address[0] for address in cur.fetchall()]
     close_session(con, cur)
     
-    return data.fetchall()
+    return addresses
