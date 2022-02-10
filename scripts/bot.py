@@ -14,7 +14,7 @@ TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
 def send_daily_report():
     bot = Bot(token=TOKEN)
 
-    today       = date.today().strftime('%Y-%m-%d')
+    today       = date.today().strftime('%d/%m/%Y')
     now, last   = return_balance(2)
     dif         = (now - last) / last
 

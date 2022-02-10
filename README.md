@@ -12,7 +12,7 @@ This repository tracks the balance of any DEGIRO account and send reports using 
 
 ### In progress
 * Create monthly documents.
-* Add BTC and ETH wallet tracker for some given public address.
+* Add BTC and ETH wallet tracker for some given public address (partially completed).
 
 ### Raw ideas
 * Create web server and application.
