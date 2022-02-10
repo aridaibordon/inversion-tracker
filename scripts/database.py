@@ -1,8 +1,11 @@
 import os
 import psycopg2
 
+from dotenv import load_dotenv
+load_dotenv()
 
-def connect_dataset():
+def connect_database():
+    # Create connection and cursor to PosgreSQL database.
     con = psycopg2.connect(
         host        = os.environ["SERVER"],
         dbname      = os.environ["DATABASE"],
@@ -13,50 +16,53 @@ def connect_dataset():
 
 
 def close_session(connection, cursor):
+    # Close current cursor and connection.
     cursor.close()
     connection.close()
-
-
-def return_balance(number) -> list:
-    con, cur    = connect_dataset()
-    cur.execute("SELECT balance FROM degiro ORDER BY id DESC LIMIT %s", (str(number),))
-    balance = [item[0] for item in cur.fetchall()]
-    close_session(con, cur)
-    return balance
     
 
-def create_database() -> None:
-    con, cur = connect_dataset()
+def create_tables() -> None:
+    # Create tables in current db.
+    con, cur = connect_database()
 
-    cur.execute("CREATE TABLE IF NOT EXISTS degiro (id bigserial NOT NULL PRIMARY KEY, balance float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE)")
-    cur.execute("CREATE TABLE IF NOT EXISTS operations (id bigserial NOT NULL PRIMARY KEY, active text NOT NULL, number float NOT NULL, cost float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE, crypto bool NOT NULL)")
-    cur.execute("CREATE TABLE IF NOT EXISTS portfolio (id bigserial NOT NULL PRIMARY KEY, active text NOT NULL, number float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE, crypto bool NOT NULL)")
+    cur.execute('CREATE TABLE IF NOT EXISTS degiro (id bigserial NOT NULL PRIMARY KEY, balance float NOT NULL, orderDate date NOT NULL DEFAULT CURRENT_DATE)')
+    cur.execute('CREATE TABLE IF NOT EXISTS address (id bigserial NOT NULL PRIMARY KEY, address text NOT NULL)')
+    con.commit()
+    close_session(con, cur)
+
+
+def add_address(address: str) -> None:
+    # Add BTC address to database.
+    con, cur = connect_database()
+    
+    cur.execute('INSERT INTO address (address) VALUES (%s)', (address,))
     con.commit()
     close_session(con, cur)
 
 
 def update_degiro_db(balance: float) -> None:
-    con, cur = connect_dataset()
+    # Insert new balance to database.
+    con, cur = connect_database()
 
-    cur.execute("INSERT INTO degiro (balance) VALUES (%s)", (balance,))
+    cur.execute('INSERT INTO degiro (balance) VALUES (%s)', (balance,))
     con.commit()
     close_session(con, cur)
 
 
-def add_operation(active, number, cpu, crypto) -> None:
-    con, cur = connect_dataset()
-
-    cur.execute("INSERT INTO operations (active, number, cost, crypto) VALUES (%s, %s, %s, %s)", (active, number, cpu, crypto))
-    con.commit()
+def return_balance(count: int) -> list:
+    # Return last {count} balances.
+    con, cur    = connect_database()
+    cur.execute("SELECT balance FROM degiro ORDER BY id DESC LIMIT %s", (str(count),))
+    balance     = [item[0] for item in cur.fetchall()]
     close_session(con, cur)
+    return balance
 
 
-def get_portfolio() -> None:
-    con, cur = connect_dataset()
-
-    cur.execute("SELECT active, SUM(number), crypto FROM operations GROUP BY active")
-    for active, number, crypto in cur.fetchall():
-        cur.execute("INSERT INTO portfolio (active, number, crypto) VALUES (%s, %s, %s)", (active, number, crypto))
-
-    con.commit()
+def get_addresses() -> tuple:
+    # Return all addresses in database.
+    con, cur    = connect_database()
+    cur.execute('SELECT address FROM address')
+    addresses   = [address[0] for address in cur.fetchall()]
     close_session(con, cur)
+    
+    return addresses

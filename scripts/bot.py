@@ -4,8 +4,9 @@ import yfinance as yf
 from datetime import date
 from telegram import ParseMode, Bot
 
-from scripts.plot import create_weekly_plot
 from scripts.database import return_balance
+from scripts.crypto import get_total_balance
+from scripts.plot import create_weekly_plot
 
 TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
 
@@ -13,19 +14,14 @@ TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
 def send_daily_report():
     bot = Bot(token=TOKEN)
 
-    today       = date.today()
+    today       = date.today().strftime('%d/%m/%Y')
     now, last   = return_balance(2)
     dif         = (now - last) / last
 
-    text   = f'<b>Daily report</b> ({today.strftime("%d/%m/%Y")})\n\nYour account\'s balance is {now:.2f}€ ({dif:+.2%}).'
-    text  += f'\n\n<pre>Watchlist\n'
+    crypto      = get_total_balance()
 
-    watchlist = ['^IBEX', '^GSPC', '^IXIC', 'BTC-USD']
-
-    for stock in watchlist:
-        ticker  = yf.Ticker(stock)
-        per     = ticker.history()['Close'].pct_change()[-1]
-        text   += f'\n{stock:<28} {per:+.2%}'
+    text   = f'<b>Daily report</b> ({today})\n\nYour DEGIRO account\'s balance is {now:.2f}€ ({dif:+.2%}).'
+    text  += f'Your crypto portfolio is currently valued as {crypto:.2f}'
 
     bot.send_message(chat_id=CHAT_ID, text=text+'</pre>', parse_mode=ParseMode.HTML)
 
