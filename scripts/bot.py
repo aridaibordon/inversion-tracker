@@ -20,8 +20,8 @@ def send_daily_report():
 
     crypto      = get_total_balance()
 
-    text   = f'<b>Daily report</b> ({today})\n\nYour DEGIRO account\'s balance is {now:.2f}€ ({dif:+.2%}).'
-    text  += f'\nYour crypto portfolio is currently valued as {crypto:.2f}'
+    text   = f'<b>Daily report</b> ({today})\n\nYour total DEGIRO account\'s balance is {now:.2f}€ ({dif:+.2%}).'
+    text  += f'\nYour crypto addresses balance is {crypto:.2f}'
 
     bot.send_message(chat_id=CHAT_ID, text=text, parse_mode=ParseMode.HTML)
 
