@@ -9,5 +9,6 @@ scripts/address.txt
 # Google API
 client_secret.json
 
-# Test folder
+# Test folder and file
 test/
+test.py
