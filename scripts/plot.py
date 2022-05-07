@@ -3,7 +3,7 @@ from datetime import date
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-from scripts.database import return_balance
+from scripts.database import return_degiro_balance
 
 
 def create_weekly_plot() -> None:
@@ -24,7 +24,7 @@ def create_weekly_plot() -> None:
     fig = plt.figure(figsize=(6, 4), tight_layout=True)
     ax = fig.add_subplot(111)
 
-    ax.plot(range(5), return_balance(5)[::-1], 'o-', linewidth=1.5, color=SECONDARY_COLOR)
+    ax.plot(range(5), return_degiro_balance(5)[::-1], 'o-', linewidth=1.5, color=SECONDARY_COLOR)
 
     ax.set_xticks(range(5))
     ax.set_xticklabels([day[:3] for day in days])

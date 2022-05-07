@@ -47,7 +47,7 @@ def update_degiro_db(balance: float) -> None:
     close_session(con, cur)
 
 
-def return_balance(count: int) -> list:
+def return_degiro_balance(count: int) -> list:
     # Return last {count} balances.
     con, cur    = connect_database()
     cur.execute("SELECT balance FROM degiro ORDER BY id DESC LIMIT %s", (str(count),))
