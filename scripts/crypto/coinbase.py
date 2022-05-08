@@ -7,7 +7,7 @@ def load_cb_client() -> Client:
     return Client(os.environ['api_key'], os.environ['api_secret'])
 
 
-def check_cb_balance() -> float:
+def return_cb_balance() -> float:
     client = load_cb_client()
     accounts = client.get_accounts()
 

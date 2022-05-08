@@ -9,7 +9,7 @@ def load_cbpro_client():
     return AuthenticatedClient(os.environ['cbpro_api_key'], os.environ['cbpro_api_secret'], os.environ['cbpro_passphrase'])
 
 
-def check_cbpro_balance():
+def return_cbpro_balance():
     client = load_cbpro_client()
 
     balance = 0
@@ -18,7 +18,6 @@ def check_cbpro_balance():
             continue
         
         change_price = float(client.get_product_24hr_stats(wallet['currency'] + '-EUR')['last'])
-
         balance += float(wallet['balance']) * change_price
-        print(wallet['balance'], wallet['currency'])
-        print(balance)
+        
+        return balance
