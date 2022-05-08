@@ -12,14 +12,14 @@ This repository tracks the balance of any DEGIRO account and send reports using 
 
 ### In progress
 * Create monthly documents.
-* Add BTC and ETH wallet tracker for some given public address (partially completed).
+* Create web server and application.
 
 ### Raw ideas
-* Create web server and application.
 * Add more brokers (eToro, Interactive Brokers).
 * Unify bot service and database.
 
 ### Completed
-* Compare daily earnings with a selection of indexes and stocks (01/22).
-* Add weekly reports with custom plots (01/22).
-* Migrate from sqlite to postgreSQL (12/21). 
+* Compare daily earnings with a selection of indexes and stocks (01/22 &#9745;).
+* Add weekly reports with custom plots (01/22 &#9745;).
+* Migrate from sqlite to postgreSQL (12/21 &#9745;). 
+* Add BTC and ETH wallet tracker for some given public address (05/22 &#9745;).
