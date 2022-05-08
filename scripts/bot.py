@@ -5,7 +5,7 @@ from datetime import date
 from telegram import ParseMode, Bot
 
 from scripts.database import return_degiro_balance
-from scripts.crypto.personal import get_total_crypto_balance
+from scripts.crypto.personal import return_personal_crypto_balance
 from scripts.plot import create_weekly_plot
 
 TOKEN, CHAT_ID = os.environ["TOKEN"], os.environ["CHAT_ID"]
@@ -18,7 +18,7 @@ def send_daily_report():
     now, last   = return_degiro_balance(2)
     dif         = (now - last) / last
 
-    crypto      = get_total_crypto_balance()
+    crypto      = return_personal_crypto_balance()
 
     text   = f'<b>Daily report</b> ({today})\n\nYour total DEGIRO account\'s balance is {now:.2f}€ ({dif:+.2%}).'
     text  += f'\nYour crypto addresses balance is {crypto:.2f}'
