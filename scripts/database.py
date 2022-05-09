@@ -59,7 +59,19 @@ def return_degiro_balance(count: int) -> list:
     cur.execute(
         "SELECT degiro FROM balance ORDER BY id DESC LIMIT %s", (str(count),))
 
-    balance = [item[0] for item in cur.fetchall()]
+    degiro = [item[0] for item in cur.fetchall()]
+    close_session(con, cur)
+
+    return degiro
+
+
+def return_balance(count: int) -> list:
+    con, cur = connect_database()
+
+    cur.execute(
+        "SELECT degiro, coinbase, personal FROM balance ORDER BY id DESC LIMIT %s", (str(count),))
+
+    balance = cur.fetchall()
     close_session(con, cur)
 
     return balance
