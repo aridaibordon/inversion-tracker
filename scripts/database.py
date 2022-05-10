@@ -46,7 +46,7 @@ def update_balance(degiro: float, coinbase: float, personal: float) -> None:
     con, cur = connect_database()
 
     cur.execute('INSERT INTO balance (degiro, coinbase, personal) VALUES (%s, %s, %s)',
-                (degiro, coinbase, personal))
+                (round(degiro, 2), round(coinbase, 2), round(personal, 2)))
 
     con.commit()
     close_session(con, cur)
