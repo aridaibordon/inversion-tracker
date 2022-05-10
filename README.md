@@ -6,6 +6,7 @@ This repository tracks the balance of any DEGIRO account and send reports using 
 
 * Your DEGIRO account and password (USERDEGIRO and PASSWORD).
 * Telegram token and a your chat id (TOKEN and CHAT_ID).
+* API keys for your coinbase and coinbase pro accounts.
 * Server, database, user and password of a postgreSQL database. For example, you can get one for free [here](https://www.elephantsql.com/).
 
 ## Features
