@@ -2,7 +2,7 @@ import os
 import psycopg2
 
 
-def connect_database():
+def connect_database() -> tuple:
     # Create connection and cursor to PosgreSQL database.
     con = psycopg2.connect(
         host=os.environ["SERVER"],
@@ -13,7 +13,7 @@ def connect_database():
     return con, con.cursor()
 
 
-def close_session(connection, cursor):
+def close_session(connection, cursor) -> None:
     # Close current cursor and connection.
     cursor.close()
     connection.close()
