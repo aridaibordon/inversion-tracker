@@ -2,7 +2,7 @@ import os
 import psycopg2
 
 
-def connect_database():
+def connect_database() -> tuple:
     # Create connection and cursor to PosgreSQL database.
     con = psycopg2.connect(
         host=os.environ["SERVER"],
@@ -13,7 +13,7 @@ def connect_database():
     return con, con.cursor()
 
 
-def close_session(connection, cursor):
+def close_session(connection, cursor) -> None:
     # Close current cursor and connection.
     cursor.close()
     connection.close()
@@ -46,7 +46,7 @@ def update_balance(degiro: float, coinbase: float, personal: float) -> None:
     con, cur = connect_database()
 
     cur.execute('INSERT INTO balance (degiro, coinbase, personal) VALUES (%s, %s, %s)',
-                (degiro, coinbase, personal))
+                (round(degiro, 2), round(coinbase, 2), round(personal, 2)))
 
     con.commit()
     close_session(con, cur)
@@ -59,7 +59,19 @@ def return_degiro_balance(count: int) -> list:
     cur.execute(
         "SELECT degiro FROM balance ORDER BY id DESC LIMIT %s", (str(count),))
 
-    balance = [item[0] for item in cur.fetchall()]
+    degiro = [item[0] for item in cur.fetchall()]
+    close_session(con, cur)
+
+    return degiro
+
+
+def return_balance(count: int) -> list:
+    con, cur = connect_database()
+
+    cur.execute(
+        "SELECT degiro, coinbase, personal FROM balance ORDER BY id DESC LIMIT %s", (str(count),))
+
+    balance = cur.fetchall()
     close_session(con, cur)
 
     return balance
