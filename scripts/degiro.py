@@ -11,10 +11,11 @@ USERNAME, PASSWORD = os.environ["USERDEGIRO"], os.environ["PASSWORD"]
 
 
 def text_to_float(text) -> float:
+    # Transform degiro balance to float
     return float(text.replace(".", "").replace(",", "."))
 
 
-def get_degiro_balance() -> float:
+def return_degiro_balance() -> float:
     # Returns balance on DEGIRO account
     browser = webdriver.Chrome(ChromeDriverManager().install())
 

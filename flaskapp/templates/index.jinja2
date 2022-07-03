@@ -10,12 +10,13 @@
 
 <script>
     const data = {
-        labels: {{ labels | safe }},
+        labels: {{ labels[::-1] | safe }},
     datasets: [{
-        label: 'My First dataset',
+        label: 'Degiro balance',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: {{ balance | safe }},
+        data: {{ balance[::-1] | safe }},
+        fill: true,
       }]
     };
 
@@ -23,7 +24,7 @@
         type: 'line',
         data: data,
         options: {
-            responsive: false
+            responsive: false,
         }
     };
 </script>
