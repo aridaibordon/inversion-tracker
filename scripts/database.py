@@ -23,7 +23,7 @@ def create_tables() -> None:
     # Create tables in current db.
     con, cur = connect_database()
 
-    cur.execute('CREATE TABLE IF NOT EXISTS balance (id bigserial NOT NULL PRIMARY KEY, degiro float, coinbase float, personal float, order date DEFAULT CURRENT_DATE)')
+    cur.execute('CREATE TABLE IF NOT EXISTS balance (id bigserial NOT NULL PRIMARY KEY, degiro float, coinbase float, personal float, orderDate date NOT NULL DEFAULT CURRENT_DATE)')
     cur.execute(
         'CREATE TABLE IF NOT EXISTS address (id bigserial NOT NULL PRIMARY KEY, address text NOT NULL)')
 
